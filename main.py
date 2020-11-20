@@ -1,14 +1,20 @@
-# 1. Library imports
 import uvicorn
 from fastapi import FastAPI
 from Model import IrisModel, IrisSpecies
+from fastapi.middleware.cors import CORSMiddleware
 
-# 2. Create app and model objects
+
 app = FastAPI()
 model = IrisModel()
 
-# 3. Expose the prediction functionality, make a prediction from the passed
-#    JSON data and return the predicted flower species with the confidence
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 @app.post('/predict')
 def predict_species(iris: IrisSpecies):
     data = iris.dict()
