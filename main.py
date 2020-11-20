@@ -8,7 +8,7 @@ app = FastAPI()
 model = IrisModel()
 
 origins = [
-    "http://localhost:8081"
+    "https://iris-predictor.netlify.app/"
 ]
 
 app.add_middleware(
